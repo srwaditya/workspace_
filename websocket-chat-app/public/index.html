@@ -1,0 +1,116 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced WebSocket Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        #chat { 
+            border: 1px solid #ccc; 
+            width: 300px; 
+            height: 400px; 
+            overflow-y: auto; 
+            margin-bottom: 10px; 
+            padding: 10px; 
+            position: relative; 
+        }
+        #message-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 70%;
+            animation: fadeIn 0.3s ease-out;
+            word-wrap: break-word;
+        }
+        .message.sent { align-self: flex-end; background-color: #d1e7dd; }
+        .message.received { align-self: flex-start; background-color: #f8d7da; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #555;
+            border-radius: 50%;
+            animation: bounce 0.6s infinite alternate;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-6px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Enhanced WebSocket Chat</h1>
+    <div id="chat">
+        <div id="message-container"></div>
+        <div id="typing-indicator" class="typing-indicator" style="display: none;">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+    </div>
+    <input type="text" id="message" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        // Connect to WebSocket server
+        const ws = new WebSocket('ws://localhost:3000');
+        const messageContainer = document.getElementById('message-container');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        ws.onopen = () => console.log('Connected to WebSocket server');
+        
+        ws.onmessage = (event) => {
+            const messageData = JSON.parse(event.data);
+            displayMessage(messageData);
+            typingIndicator.style.display = 'none';
+        };
+
+        function displayMessage(messageData) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', messageData.sender === 'You' ? 'sent' : 'received');
+            messageDiv.innerHTML = `<strong>${messageData.sender}</strong>: ${messageData.content}`;
+            messageContainer.appendChild(messageDiv);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('message');
+            if (input.value.trim() !== '') {
+                const messageData = {
+                    sender: 'You',
+                    timestamp: new Date().toISOString(),
+                    content: input.value,
+                    type: 'text'
+                };
+                ws.send(JSON.stringify(messageData));
+                displayMessage(messageData);
+                input.value = '';
+            }
+        }
+
+        // Show typing indicator
+        let typingTimeout;
+        document.getElementById('message').addEventListener('input', () => {
+            typingIndicator.style.display = 'flex';
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => typingIndicator.style.display = 'none', 1000);
+        });
+    </script>
+</body>
+</html>
