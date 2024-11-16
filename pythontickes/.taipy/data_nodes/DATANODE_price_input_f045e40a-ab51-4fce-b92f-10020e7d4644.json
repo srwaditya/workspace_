@@ -1,0 +1,32 @@
+{
+"id": "DATANODE_price_input_f045e40a-ab51-4fce-b92f-10020e7d4644",
+"config_id": "price_input",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "pickle",
+"owner_id": "SCENARIO_pricing_strategy_942b5605-f018-459e-b518-8f6f8a9077fe",
+"parent_ids": [
+"TASK_calculate_revenue_ec66c7aa-14af-4c09-8599-904f4e845885",
+"TASK_predict_sales_b3562bb8-2d8d-4f17-963c-20250185369e"
+],
+"last_edit_date": "2024-11-16T19:08:53.745943",
+"edits": [
+{
+"timestamp": "2024-11-16T19:08:53.620987",
+"editor": "TAIPY",
+"comment": "Default data written."
+},
+{
+"timestamp": "2024-11-16T19:08:53.745943"
+}
+],
+"version": "19135dc1-4cd3-49ee-b7e2-c0b2c708007b",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": false,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"is_generated": true,
+"path": "user_data\\pickles\\DATANODE_price_input_f045e40a-ab51-4fce-b92f-10020e7d4644.p"
+}
+}

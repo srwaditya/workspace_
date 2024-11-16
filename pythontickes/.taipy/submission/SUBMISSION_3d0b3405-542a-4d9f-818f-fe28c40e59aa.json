@@ -1,0 +1,20 @@
+{
+"id": "SUBMISSION_3d0b3405-542a-4d9f-818f-fe28c40e59aa",
+"entity_id": "SCENARIO_pricing_strategy_d09b5574-fd3e-4b07-8343-2ece36252b25",
+"entity_type": "SCENARIO",
+"entity_config_id": "pricing_strategy",
+"job_ids": [
+"JOB_predict_sales_e97e8bc6-cf77-4fe8-84dc-5d94713b01bc",
+"JOB_calculate_revenue_dde29c63-0008-48f3-8b6c-7b205d0c9d65"
+],
+"properties": {},
+"creation_date": "2024-11-16T19:08:53.773685",
+"submission_status": "<SubmissionStatus.COMPLETED: 7>",
+"version": "19135dc1-4cd3-49ee-b7e2-c0b2c708007b",
+"is_completed": true,
+"is_abandoned": false,
+"is_canceled": false,
+"running_jobs": [],
+"blocked_jobs": [],
+"pending_jobs": []
+}

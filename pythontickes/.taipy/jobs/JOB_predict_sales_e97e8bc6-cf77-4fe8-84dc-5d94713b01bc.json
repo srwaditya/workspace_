@@ -1,0 +1,29 @@
+{
+"id": "JOB_predict_sales_e97e8bc6-cf77-4fe8-84dc-5d94713b01bc",
+"task_id": "TASK_predict_sales_5c1c0d5d-0645-4747-87db-d1dd74055ec9",
+"status": "<Status.COMPLETED: 7>",
+"status_change_records": {
+"SUBMITTED": "2024-11-16T19:08:53.808790",
+"PENDING": "2024-11-16T19:08:53.854453",
+"RUNNING": "2024-11-16T19:08:53.940758",
+"COMPLETED": "2024-11-16T19:08:54.063487"
+},
+"force": false,
+"submit_id": "SUBMISSION_3d0b3405-542a-4d9f-818f-fe28c40e59aa",
+"submit_entity_id": "SCENARIO_pricing_strategy_d09b5574-fd3e-4b07-8343-2ece36252b25",
+"creation_date": "2024-11-16T19:08:53.808790",
+"subscribers": [
+{
+"fct_name": "_Orchestrator._update_submission_status",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+},
+{
+"fct_name": "_Orchestrator._on_status_change",
+"fct_params": [],
+"fct_module": "taipy.core._orchestrator._orchestrator"
+}
+],
+"stacktrace": [],
+"version": "19135dc1-4cd3-49ee-b7e2-c0b2c708007b"
+}

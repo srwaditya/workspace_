@@ -1,0 +1,19 @@
+{
+"id": "TASK_predict_sales_b3562bb8-2d8d-4f17-963c-20250185369e",
+"owner_id": "SCENARIO_pricing_strategy_942b5605-f018-459e-b518-8f6f8a9077fe",
+"parent_ids": [
+"SCENARIO_pricing_strategy_942b5605-f018-459e-b518-8f6f8a9077fe"
+],
+"config_id": "predict_sales",
+"input_ids": [
+"DATANODE_price_input_f045e40a-ab51-4fce-b92f-10020e7d4644"
+],
+"function_name": "predict_sales",
+"function_module": "__main__",
+"output_ids": [
+"DATANODE_sales_output_7eda1794-e92b-42be-a0c8-e40ed61463e4"
+],
+"version": "19135dc1-4cd3-49ee-b7e2-c0b2c708007b",
+"skippable": false,
+"properties": {}
+}

@@ -1,0 +1,20 @@
+{
+"id": "TASK_calculate_revenue_d5cf2cd6-17bc-4639-964d-a8e5c6bdebb0",
+"owner_id": "SCENARIO_pricing_strategy_d09b5574-fd3e-4b07-8343-2ece36252b25",
+"parent_ids": [
+"SCENARIO_pricing_strategy_d09b5574-fd3e-4b07-8343-2ece36252b25"
+],
+"config_id": "calculate_revenue",
+"input_ids": [
+"DATANODE_price_input_e35195f2-a393-48e3-9786-60711270d4ac",
+"DATANODE_sales_output_b313fde0-7598-4d09-a290-b773791daed8"
+],
+"function_name": "calculate_revenue",
+"function_module": "__main__",
+"output_ids": [
+"DATANODE_revenue_output_500467a2-1b46-4c46-bb6f-994555076dd3"
+],
+"version": "19135dc1-4cd3-49ee-b7e2-c0b2c708007b",
+"skippable": false,
+"properties": {}
+}

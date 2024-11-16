@@ -1,0 +1,27 @@
+{
+"id": "DATANODE_revenue_output_500467a2-1b46-4c46-bb6f-994555076dd3",
+"config_id": "revenue_output",
+"scope": "<Scope.SCENARIO: 1>",
+"storage_type": "pickle",
+"owner_id": "SCENARIO_pricing_strategy_d09b5574-fd3e-4b07-8343-2ece36252b25",
+"parent_ids": [
+"TASK_calculate_revenue_d5cf2cd6-17bc-4639-964d-a8e5c6bdebb0"
+],
+"last_edit_date": "2024-11-16T19:08:54.224270",
+"edits": [
+{
+"job_id": "JOB_calculate_revenue_dde29c63-0008-48f3-8b6c-7b205d0c9d65",
+"timestamp": "2024-11-16T19:08:54.224270"
+}
+],
+"version": "19135dc1-4cd3-49ee-b7e2-c0b2c708007b",
+"validity_days": null,
+"validity_seconds": null,
+"edit_in_progress": false,
+"editor_id": null,
+"editor_expiration_date": null,
+"data_node_properties": {
+"is_generated": true,
+"path": "user_data\\pickles\\DATANODE_revenue_output_500467a2-1b46-4c46-bb6f-994555076dd3.p"
+}
+}
