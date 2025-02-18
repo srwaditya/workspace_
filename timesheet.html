@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Timesheet and Routing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .timer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button.start { background-color: #28a745; color: white; }
+        button.stop { background-color: #dc3545; color: white; }
+        button.reset { background-color: #ffc107; color: black; }
+        .report {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Employee Timesheet & Routing App</h1>
+    <div class="timer">
+        <h2>Work Timer</h2>
+        <p><strong>Time Elapsed:</strong> <span id="time">0 seconds</span></p>
+        <button class="start" onclick="startTimer()">Start</button>
+        <button class="stop" onclick="stopTimer()">Stop</button>
+        <button class="reset" onclick="resetTimer()">Reset</button>
+    </div>
+    <div class="report">
+        <h2>Weekly Report</h2>
+        <table id="weeklyReport">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Hours Worked</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamically populated -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let time = 0;
+    let isRunning = false;
+    let interval;
+
+    const startTimer = () => {
+        if (!isRunning) {
+            isRunning = true;
+            interval = setInterval(() => {
+                time++;
+                document.getElementById('time').textContent = `${time} seconds`;
+            }, 1000);
+        }
+    };
+
+    const stopTimer = () => {
+        if (isRunning) {
+            clearInterval(interval);
+            isRunning = false;
+        }
+    };
+
+    const resetTimer = () => {
+        stopTimer();
+        time = 0;
+        document.getElementById('time').textContent = '0 seconds';
+    };
+
+    // Simulate weekly report generation
+    const generateWeeklyReport = () => {
+        const data = [
+            { date: '2023-10-01', hoursWorked: 8 },
+            { date: '2023-10-02', hoursWorked: 7 },
+            { date: '2023-10-03', hoursWorked: 8 },
+        ];
+
+        const tbody = document.querySelector('#weeklyReport tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+
+        data.forEach(entry => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${entry.date}</td><td>${entry.hoursWorked} hours</td>`;
+            tbody.appendChild(row);
+        });
+    };
+
+    // Generate report on page load
+    window.onload = generateWeeklyReport;
+</script>
+</body>
+</html>

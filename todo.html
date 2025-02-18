@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Application</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .todo-form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .todo-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .todo-form button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .todo-form button:hover {
+            background-color: #45a049;
+        }
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .todo-item:hover {
+            transform: scale(1.02);
+            background-color: #e9ecef;
+        }
+        .todo-item.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .actions button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .actions .pending {
+            background-color: #ffc107;
+            color: black;
+        }
+        .actions .closed {
+            background-color: #dc3545;
+            color: white;
+        }
+        .actions .reopen {
+            background-color: #007bff;
+            color: white;
+        }
+        .actions .delete {
+            background-color: #6c757d;
+            color: white;
+        }
+        .actions button:hover {
+            opacity: 0.8;
+        }
+        .report {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        .report h2 {
+            margin-top: 0;
+        }
+        .report table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .report th, .report td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .report th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Todo Application</h1>
+    <div class="todo-form">
+        <input type="text" id="taskInput" placeholder="Enter a new task..." />
+        <button onclick="addTask()">Add Task</button>
+    </div>
+    <ul class="todo-list" id="todoList"></ul>
+    <div class="report">
+        <h2>Task Report</h2>
+        <table id="taskReport">
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamically populated -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let taskIdCounter = 1;
+    const tasks = [];
+
+    const addTask = () => {
+        const taskInput = document.getElementById('taskInput');
+        const taskText = taskInput.value.trim();
+        if (!taskText) return;
+
+        const task = {
+            id: taskIdCounter++,
+            text: taskText,
+            status: 'pending'
+        };
+        tasks.push(task);
+
+        renderTasks();
+        updateReport();
+        taskInput.value = '';
+    };
+
+    const renderTasks = () => {
+        const todoList = document.getElementById('todoList');
+        todoList.innerHTML = '';
+
+        tasks.forEach(task => {
+            const li = document.createElement('li');
+            li.className = `todo-item ${task.status === 'closed' ? 'completed' : ''}`;
+            li.innerHTML = `
+                <span>${task.text}</span>
+                <div class="actions">
+                    <button class="pending" onclick="updateTaskStatus(${task.id}, 'pending')">Pending</button>
+                    <button class="closed" onclick="updateTaskStatus(${task.id}, 'closed')">Closed</button>
+                    <button class="reopen" onclick="updateTaskStatus(${task.id}, 'reopen')">Reopen</button>
+                    <button class="delete" onclick="deleteTask(${task.id})">Delete</button>
+                </div>
+            `;
+            todoList.appendChild(li);
+        });
+    };
+
+    const updateTaskStatus = (id, status) => {
+        const task = tasks.find(t => t.id === id);
+        if (task) {
+            if (status === 'reopen') {
+                task.status = 'pending';
+            } else {
+                task.status = status;
+            }
+            renderTasks();
+            updateReport();
+        }
+    };
+
+    const deleteTask = (id) => {
+        const index = tasks.findIndex(t => t.id === id);
+        if (index !== -1) {
+            tasks.splice(index, 1);
+            renderTasks();
+            updateReport();
+        }
+    };
+
+    const updateReport = () => {
+        const tbody = document.querySelector('#taskReport tbody');
+        tbody.innerHTML = '';
+
+        tasks.forEach(task => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${task.id}</td><td>${task.status}</td>`;
+            tbody.appendChild(row);
+        });
+    };
+</script>
+</body>
+</html>
